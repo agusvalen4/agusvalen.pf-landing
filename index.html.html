@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agustín Valenzuela · Preparación Física de Alto Rendimiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #070c0e;
+      --bg2:       #0b1518;
+      --bg3:       #0f1d21;
+      --border:    #1a3038;
+      --border-hi: #25464f;
+      --accent:    #0d9e8a;
+      --accent2:   #0a7d6e;
+      --accent3:   #38bdf8;
+      --text:      #dde8ea;
+      --text-dim:  #6a8f96;
+      --text-mid:  #9ab8be;
+      --gold:      #c9a84c;
+      --white:     #f0f6f7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ────────────────────────────────────────────── */
+    nav {
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.1rem 3rem;
+      background:rgba(7,12,14,.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(26,48,56,.5);
+    }
+    .nav-logo { font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:var(--white);text-decoration:none; }
+    .nav-logo em { color:var(--accent);font-style:normal; }
+    .nav-links { display:flex;gap:2rem;list-style:none; }
+    .nav-links a { color:var(--text-mid);text-decoration:none;font-size:.88rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:color .2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-cta {
+      background:var(--accent)!important;color:var(--bg)!important;
+      padding:.45rem 1.3rem!important;border-radius:2px;font-weight:700!important;
+      transition:background .2s!important;
+    }
+    .nav-cta:hover { background:var(--accent2)!important; }
+
+    /* ── HAMBURGER BUTTON ────────────────────────────────── */
+    .nav-hamburger {
+      display:none;
+      flex-direction:column;justify-content:center;align-items:center;
+      width:40px;height:40px;
+      background:transparent;border:1px solid var(--border-hi);border-radius:3px;
+      cursor:pointer;padding:0;gap:5px;
+      transition:border-color .2s;
+      flex-shrink:0;
+    }
+    .nav-hamburger:hover { border-color:var(--accent); }
+    .nav-hamburger .bar {
+      width:18px;height:1.5px;background:var(--text-mid);
+      transition:transform .3s ease,opacity .3s ease,background .2s;
+      display:block;
+    }
+    .nav-hamburger.open .bar:nth-child(1) { transform:translateY(6.5px) rotate(45deg);background:var(--accent); }
+    .nav-hamburger.open .bar:nth-child(2) { opacity:0; }
+    .nav-hamburger.open .bar:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg);background:var(--accent); }
+
+    /* ── MOBILE MENU OVERLAY ─────────────────────────────── */
+    .mobile-menu {
+      display:none;
+      position:fixed;top:0;left:0;right:0;bottom:0;z-index:199;
+      background:rgba(7,12,14,.97);
+      backdrop-filter:blur(16px);
+      flex-direction:column;justify-content:center;align-items:center;gap:0;
+      opacity:0;pointer-events:none;
+      transition:opacity .3s ease;
+    }
+    .mobile-menu.open {
+      opacity:1;pointer-events:all;
+    }
+    .mobile-menu-links {
+      list-style:none;display:flex;flex-direction:column;align-items:center;gap:0;
+      width:100%;
+    }
+    .mobile-menu-links li {
+      width:100%;text-align:center;border-bottom:1px solid var(--border);
+      opacity:0;transform:translateY(16px);
+      transition:opacity .35s ease,transform .35s ease;
+    }
+    .mobile-menu.open .mobile-menu-links li:nth-child(1) { opacity:1;transform:translateY(0);transition-delay:.05s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(2) { opacity:1;transform:translateY(0);transition-delay:.1s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(3) { opacity:1;transform:translateY(0);transition-delay:.15s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(4) { opacity:1;transform:translateY(0);transition-delay:.2s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(5) { opacity:1;transform:translateY(0);transition-delay:.25s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(6) { opacity:1;transform:translateY(0);transition-delay:.3s; }
+    .mobile-menu-links a {
+      display:block;padding:1.3rem 2rem;
+      font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--text-dim);text-decoration:none;
+      transition:color .2s,background .2s;
+    }
+    .mobile-menu-links a:hover { color:var(--white);background:rgba(13,158,138,.05); }
+    .mobile-menu-cta {
+      margin-top:2rem;
+      opacity:0;transform:translateY(16px);
+      transition:opacity .35s ease .32s,transform .35s ease .32s;
+    }
+    .mobile-menu.open .mobile-menu-cta { opacity:1;transform:translateY(0); }
+    .mobile-menu-top {
+      position:absolute;top:1.1rem;left:3rem;right:3rem;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height:100vh;
+      display:grid;grid-template-columns:1fr 1fr;
+      position:relative;overflow:hidden;
+    }
+    .hero-left {
+      display:flex;flex-direction:column;justify-content:center;
+      padding:9rem 3.5rem 4rem 3.5rem;position:relative;z-index:2;
+    }
+    .hero-eyebrow {
+      display:inline-flex;align-items:center;gap:.6rem;
+      font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:1.8rem;
+    }
+    .hero-eyebrow::before { content:'';width:24px;height:1.5px;background:var(--accent); }
+    .hero-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(4rem,7.5vw,7rem);
+      line-height:.9;letter-spacing:.01em;
+      color:var(--white);margin-bottom:1.8rem;
+    }
+    .hero-title .t-accent { color:var(--accent);display:block; }
+    .hero-title .t-dim { color:var(--text-dim);display:block;font-size:clamp(2.2rem,4vw,3.8rem); }
+    .hero-value {
+      font-size:1.05rem;color:var(--text-mid);line-height:1.75;
+      max-width:440px;font-weight:300;margin-bottom:2.2rem;
+    }
+    .hero-value strong { color:var(--white);font-weight:500; }
+    .hero-actions { display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem; }
+
+    .btn-primary {
+      background:var(--accent);color:var(--bg);
+      padding:.9rem 2rem;font-size:.82rem;font-weight:700;
+      letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+      border-radius:2px;border:none;cursor:pointer;
+      transition:background .2s,transform .15s;display:inline-block;
+    }
+    .btn-primary:hover { background:var(--accent2);transform:translateY(-2px); }
+    .btn-ghost {
+      background:transparent;color:var(--text-mid);
+      padding:.9rem 2rem;font-size:.82rem;font-weight:500;
+      letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+      border-radius:2px;border:1px solid var(--border-hi);cursor:pointer;
+      transition:border-color .2s,color .2s,transform .15s;display:inline-block;
+    }
+    .btn-ghost:hover { border-color:var(--accent);color:var(--accent);transform:translateY(-2px); }
+
+    /* ── ACORDEÓN VARIABLES DE TRABAJO ──────────────────────── */
+    .work-vars-btn {
+      display:inline-flex;align-items:center;gap:.6rem;
+    }
+    .work-vars-arrow { transition:transform .2s ease;flex-shrink:0; }
+    .work-vars-btn.open { border-color:var(--accent);color:var(--accent); }
+    .work-vars-btn.open .work-vars-arrow { transform:rotate(180deg); }
+
+    .work-vars-panel {
+      max-height:0;overflow:hidden;
+      transition:max-height .35s ease,opacity .25s ease,margin-top .35s ease;
+      opacity:0;margin-top:0;
+    }
+    .work-vars-panel.open {
+      max-height:600px;opacity:1;margin-top:1.4rem;
+    }
+    .work-vars-inner {
+      display:flex;flex-direction:column;gap:.6rem;
+      background:var(--bg2);border:1px solid var(--border-hi);
+      border-radius:6px;padding:.6rem;
+    }
+    .work-vars-item {
+      display:flex;flex-direction:column;gap:.15rem;
+      padding:.85rem 1rem;border-radius:4px;
+      text-decoration:none;color:var(--text);
+      border:1px solid transparent;
+      transition:background .15s,color .15s,border-color .15s;
+    }
+    .work-vars-item:hover {
+      background:var(--bg3);color:var(--accent);border-color:var(--border-hi);
+    }
+    .wv-item-title {
+      font-size:.85rem;font-weight:600;letter-spacing:.02em;
+      text-transform:none;
+    }
+    .wv-item-desc {
+      font-size:.72rem;color:var(--text-dim);font-weight:300;
+    }
+    .work-vars-item:hover .wv-item-desc { color:var(--text-mid); }
+    .btn-wa {
+      background:linear-gradient(135deg,#833ab4,#e1306c,#fd1d1d);color:#fff;border:none;
+      padding:.9rem 2rem;font-size:.82rem;font-weight:700;
+      letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+      border-radius:2px;cursor:pointer;
+      transition:opacity .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem;
+    }
+    .btn-wa:hover { opacity:.88;transform:translateY(-2px); }
+
+    .hero-proof {
+      display:flex;gap:2.5rem;
+      padding-top:2rem;border-top:1px solid var(--border);
+    }
+    .proof-num {
+      font-family:'Bebas Neue',sans-serif;font-size:2.4rem;
+      color:var(--white);line-height:1;
+    }
+    .proof-num em { color:var(--accent);font-style:normal; }
+    .proof-label { font-size:.68rem;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem; }
+
+    /* hero right */
+    .hero-right { position:relative;overflow:hidden; }
+    .hero-right-bg {
+      position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse at 55% 35%, rgba(13,158,138,.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(56,189,248,.06) 0%, transparent 45%),
+        linear-gradient(160deg,#0e1e22 0%,var(--bg) 100%);
+    }
+    .hero-court-svg { position:absolute;inset:0;opacity:.07; }
+    .hero-ghost-num {
+      position:absolute;top:50%;left:50%;
+      transform:translate(-50%,-55%);
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(10rem,20vw,18rem);
+      color:rgba(13,158,138,.05);
+      letter-spacing:-.02em;pointer-events:none;user-select:none;z-index:1;
+      white-space:nowrap;
+    }
+    .hero-authority {
+      position:absolute;bottom:3rem;left:2.5rem;right:2.5rem;z-index:3;
+      background:rgba(11,21,24,.85);
+      border:1px solid var(--border-hi);
+      border-left:3px solid var(--accent);
+      border-radius:4px;padding:1.2rem 1.5rem;
+      backdrop-filter:blur(8px);
+    }
+    .auth-label { font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem; }
+    .auth-teams { display:flex;flex-direction:column;gap:.4rem; }
+    .auth-team { display:flex;align-items:center;gap:.7rem;font-size:.82rem;color:var(--text-mid); }
+    .auth-team strong { color:var(--white);font-weight:600; }
+    .auth-team .league { font-size:.7rem;color:var(--text-dim);margin-left:auto;letter-spacing:.06em; }
+
+    /* ── SOCIAL PROOF BAR ────────────────────────────────── */
+    .proof-bar {
+      background:var(--bg2);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      padding:1rem 3rem;
+      display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;
+    }
+    .proof-item { display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--text-dim); }
+    .proof-item strong { color:var(--text-mid);font-weight:500; }
+    .proof-sep { width:1px;height:20px;background:var(--border); }
+
+    /* ── PROPUESTA DE VALOR ──────────────────────────────── */
+    .value-prop {
+      padding:7rem 3rem;
+      max-width:1200px;margin:0 auto;
+    }
+    .vp-grid { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
+    .section-eye {
+      font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:1rem;
+      display:flex;align-items:center;gap:.5rem;
+    }
+    .section-eye::before { content:'';width:18px;height:1.5px;background:var(--accent); }
+    .vp-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.4rem,4vw,3.6rem);
+      line-height:1;margin-bottom:1.5rem;color:var(--white);
+    }
+    .vp-title span { color:var(--accent); }
+    .vp-body { color:var(--text-mid);line-height:1.8;font-size:.95rem;font-weight:300;margin-bottom:1rem; }
+    .vp-body strong { color:var(--white);font-weight:500; }
+    .differentiators { display:flex;flex-direction:column;gap:.8rem;margin-top:1.5rem; }
+    .diff-item {
+      display:flex;align-items:flex-start;gap:1rem;
+      padding:1rem 1.2rem;
+      background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+      transition:border-color .2s;
+    }
+    .diff-item:hover { border-color:var(--accent); }
+    .diff-icon { font-size:1.3rem;flex-shrink:0;margin-top:.05rem; }
+    .diff-text h4 { font-size:.88rem;font-weight:600;color:var(--white);margin-bottom:.2rem; }
+    .diff-text p { font-size:.8rem;color:var(--text-dim);line-height:1.5; }
+
+    /* vp right - sports grid */
+    .sports-block h3 {
+      font-family:'Bebas Neue',sans-serif;font-size:1.3rem;
+      letter-spacing:.06em;color:var(--text-mid);margin-bottom:1.2rem;
+    }
+    .sports-mosaic {
+      display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;
+    }
+    .sport-tile {
+      background:var(--bg2);border:1px solid var(--border);
+      border-radius:5px;padding:1rem .5rem;
+      display:flex;flex-direction:column;align-items:center;gap:.4rem;
+      transition:border-color .2s,transform .2s;cursor:pointer;
+      text-decoration:none;position:relative;
+    }
+    .sport-tile:hover { border-color:var(--accent);transform:translateY(-3px); }
+    .sport-tile .si { font-size:1.5rem; }
+    .sport-tile .sn { font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);text-align:center; }
+    .sport-tile.hi { border-color:var(--accent);background:linear-gradient(135deg,#071a18,var(--bg2)); }
+    .sport-tile.hi .sn { color:var(--accent); }
+    .sport-tile .prog-badge {
+      position:absolute;top:5px;right:5px;
+      background:var(--accent);color:var(--bg);
+      font-size:.45rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+      padding:2px 5px;border-radius:3px;line-height:1.4;
+    }
+
+    /* ── AUTORIDAD ───────────────────────────────────────── */
+    .authority {
+      background:var(--bg2);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      padding:5rem 3rem;
+    }
+    .auth-inner { max-width:1200px;margin:0 auto; }
+    .auth-grid { display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2.5rem; }
+    .auth-creds { display:flex;flex-direction:column;gap:1rem; }
+    .cred-card {
+      padding:1.3rem 1.5rem;
+      background:var(--bg);border:1px solid var(--border);border-radius:4px;
+      border-left:3px solid var(--accent);
+    }
+    .cred-label { font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem; }
+    .cred-value { font-size:.92rem;color:var(--white);font-weight:500;line-height:1.4; }
+    .cred-detail { font-size:.78rem;color:var(--text-dim);margin-top:.2rem; }
+
+    .auth-teams-full { display:flex;flex-direction:column;gap:1rem; }
+    .team-card {
+      padding:1.5rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;
+      transition:border-color .2s;
+    }
+    .team-card:hover { border-color:var(--accent); }
+    .team-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem; }
+    .team-name { font-size:1rem;font-weight:700;color:var(--white); }
+    .team-badge {
+      font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      background:rgba(13,158,138,.15);color:var(--accent);
+      padding:.25rem .7rem;border-radius:100px;border:1px solid rgba(13,158,138,.3);
+    }
+    .team-detail { font-size:.8rem;color:var(--text-dim);line-height:1.6; }
+    .team-detail strong { color:var(--text-mid); }
+
+    /* ── PLAN PRINCIPAL (hero product) ─────────────────── */
+    .main-offer {
+      padding:7rem 3rem;
+      position:relative;overflow:hidden;
+    }
+    .main-offer::before {
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 50% 0%,rgba(13,158,138,.08) 0%,transparent 60%);
+    }
+    .main-offer-inner { max-width:1000px;margin:0 auto;position:relative;z-index:1; }
+    .offer-tag {
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(13,158,138,.12);border:1px solid rgba(13,158,138,.3);
+      color:var(--accent);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem;
+    }
+    .offer-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.5rem,5vw,4.5rem);
+      line-height:.95;color:var(--white);margin-bottom:.8rem;
+    }
+    .offer-title span { color:var(--accent); }
+    .offer-subtitle { font-size:1rem;color:var(--text-mid);font-weight:300;margin-bottom:2.5rem;max-width:600px;line-height:1.7; }
+    .offer-subtitle strong { color:var(--white);font-weight:500; }
+
+    .offer-grid { display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem; }
+    .offer-problem, .offer-solution {
+      padding:2rem;background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+    }
+    .offer-problem { border-top:2px solid #3a1a1a; }
+    .offer-solution { border-top:2px solid var(--accent); }
+    .op-label { font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem; }
+    .offer-problem .op-label { color:#e05555; }
+    .offer-solution .op-label { color:var(--accent); }
+    .op-list { list-style:none;display:flex;flex-direction:column;gap:.6rem; }
+    .op-list li { font-size:.85rem;color:var(--text-mid);line-height:1.5;display:flex;gap:.7rem; }
+    .op-list li::before { flex-shrink:0;margin-top:.05rem; }
+    .offer-problem .op-list li::before { content:'✗';color:#e05555; }
+    .offer-solution .op-list li::before { content:'✓';color:var(--accent);font-weight:700; }
+
+    .offer-features {
+      display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;
+    }
+    .feat-item {
+      padding:1.3rem;background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+      text-align:center;transition:border-color .2s;
+    }
+    .feat-item:hover { border-color:var(--accent); }
+    .feat-icon { font-size:1.5rem;margin-bottom:.5rem; }
+    .feat-title { font-size:.82rem;font-weight:600;color:var(--white);margin-bottom:.2rem; }
+    .feat-desc { font-size:.75rem;color:var(--text-dim);line-height:1.4; }
+
+    .offer-cta-block {
+      background:var(--bg2);border:1px solid var(--border-hi);border-radius:6px;
+      padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+    }
+    .offer-price-block {}
+    .offer-price-label { font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.3rem; }
+    .offer-price { font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--white);line-height:1; }
+    .offer-price em { color:var(--accent);font-style:normal;font-size:1.5rem;vertical-align:super; }
+    .offer-price-sub { font-size:.78rem;color:var(--text-dim);margin-top:.2rem; }
+    .offer-cta-actions { display:flex;flex-direction:column;gap:.7rem;align-items:flex-end; }
+    .offer-cta-note { font-size:.75rem;color:var(--text-dim);text-align:right; }
+
+    /* ── PROGRAMAS DESCARGABLES ─────────────────────────── */
+    .programs {
+      background:var(--bg2);
+      border-top:1px solid var(--border);
+      padding:7rem 3rem;
+    }
+    .programs-inner { max-width:1200px;margin:0 auto; }
+    .programs-intro { max-width:640px;margin-bottom:4rem; }
+    .programs-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem; }
+    .programs-grid-1 { grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto; }
+
+    .prog-card {
+      background:var(--bg);border:1px solid var(--border);border-radius:6px;
+      overflow:hidden;transition:border-color .25s,transform .25s;
+    }
+    .prog-card:hover { border-color:var(--accent);transform:translateY(-4px); }
+    .prog-card-top {
+      padding:2rem 2rem 1.5rem;
+      border-bottom:1px solid var(--border);
+      position:relative;overflow:hidden;
+    }
+    .prog-card-top::before {
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    }
+    .prog-card.card-princ .prog-card-top::before { background:linear-gradient(90deg,#22c55e,transparent); }
+    .prog-card.card-inter .prog-card-top::before { background:linear-gradient(90deg,var(--accent3),transparent); }
+    .prog-card.card-avanz .prog-card-top::before { background:linear-gradient(90deg,#f97316,transparent); }
+    .prog-card.card-jump  .prog-card-top::before { background:linear-gradient(90deg,#a78bfa,transparent); }
+    .prog-level {
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      padding:.25rem .8rem;border-radius:100px;border:1px solid;margin-bottom:1rem;
+    }
+    .prog-card.card-princ .prog-level { color:#22c55e;background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3); }
+    .prog-card.card-inter .prog-level { color:var(--accent3);background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3); }
+    .prog-card.card-avanz .prog-level { color:#f97316;background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.3); }
+    .prog-card.card-jump  .prog-level { color:#a78bfa;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3); }
+    .prog-name {
+      font-family:'Bebas Neue',sans-serif;font-size:2rem;
+      letter-spacing:.04em;color:var(--white);margin-bottom:.5rem;line-height:1;
+    }
+    .prog-tagline { font-size:.85rem;color:var(--text-mid);line-height:1.6;font-weight:300; }
+    .prog-tagline-main {
+      font-size:1rem;color:var(--white);line-height:1.65;font-weight:400;
+      margin-bottom:.3rem;
+    }
+
+    .prog-card-body { padding:1.8rem 2rem; }
+    .prog-includes-spacer { margin-top:1.6rem; }
+
+    .prog-cta-row { margin-bottom:1.6rem; }
+
+    .prog-problem {
+      padding:.9rem 1rem;
+      background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:4px;
+      margin-bottom:1.5rem;
+    }
+    .prog-problem-label { font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.4rem; }
+    .prog-problem-text { font-size:.82rem;color:var(--text-mid);line-height:1.5;font-style:italic; }
+
+    .prog-result {
+      display:flex;align-items:flex-start;gap:.8rem;
+      padding:.9rem 1rem;
+      background:rgba(13,158,138,.06);border:1px solid rgba(13,158,138,.2);border-radius:4px;
+      margin-bottom:1.5rem;
+    }
+    .prog-result-icon { font-size:1.2rem;flex-shrink:0; }
+    .prog-result-text { font-size:.82rem;color:var(--text-mid);line-height:1.5; }
+    .prog-result-text strong { color:var(--white);font-weight:500; }
+
+    .prog-includes-label { font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.8rem; }
+    .prog-includes { list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.8rem; }
+    .prog-includes li { font-size:.82rem;color:var(--text-mid);display:flex;gap:.6rem;line-height:1.4; }
+    .prog-includes li::before { content:'→';color:var(--accent);flex-shrink:0;font-size:.75rem;margin-top:.05rem; }
+
+    .prog-vs {
+      padding:.8rem 1rem;
+      background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);border-radius:4px;
+      font-size:.78rem;color:var(--text-dim);line-height:1.5;
+      margin-bottom:1.8rem;
+    }
+    .prog-vs strong { color:var(--gold);font-weight:600; }
+
+    .btn-prog {
+      padding:.8rem 1.6rem;font-size:.78rem;font-weight:700;
+      letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+      border-radius:2px;cursor:pointer;transition:background .2s,transform .15s;
+      display:inline-block;
+    }
+    .card-princ .btn-prog { background:#16a34a;color:var(--white); }
+    .card-princ .btn-prog:hover { background:#15803d; }
+    .card-inter .btn-prog { background:#0369a1;color:var(--white); }
+    .card-inter .btn-prog:hover { background:#075985; }
+    .card-jump .btn-prog, .btn-jump { background:#7c3aed;color:var(--white); }
+    .card-jump .btn-prog:hover, .btn-jump:hover { background:#6d28d9; }
+
+    /* prog phases mini */
+    .prog-phases { display:flex;gap:.4rem;margin-bottom:1.5rem;flex-wrap:wrap; }
+    .phase-chip {
+      font-size:.62rem;font-weight:700;letter-spacing:.06em;
+      padding:.25rem .7rem;border-radius:100px;border:1px solid;
+    }
+
+    /* ── PRESENCIAL ─────────────────────────────────────── */
+    .presencial {
+      padding:5rem 3rem;
+      max-width:1200px;margin:0 auto;
+    }
+    .presencial-card {
+      background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+      padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+    }
+    .pres-left h3 {
+      font-family:'Bebas Neue',sans-serif;font-size:2rem;
+      letter-spacing:.04em;color:var(--white);margin-bottom:.8rem;
+    }
+    .pres-left p { font-size:.88rem;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:1.5rem; }
+    .pres-details { display:flex;flex-direction:column;gap:.5rem; }
+    .pres-detail { display:flex;align-items:center;gap:.7rem;font-size:.82rem;color:var(--text-mid); }
+    .pres-detail strong { color:var(--white);font-weight:500; }
+    .pres-right { text-align:center; }
+    .pres-price-label { font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.4rem; }
+    .pres-price { font-family:'Bebas Neue',sans-serif;font-size:4rem;color:var(--white);line-height:1;margin-bottom:.3rem; }
+    .pres-price em { color:var(--accent);font-style:normal;font-size:2rem;vertical-align:super; }
+    .pres-price-sub { font-size:.78rem;color:var(--text-dim);margin-bottom:1.5rem; }
+
+    /* ── PROCESO ────────────────────────────────────────── */
+    .process {
+      background:var(--bg2);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      padding:6rem 3rem;
+    }
+    .process-inner { max-width:1200px;margin:0 auto; }
+    .process-steps { display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;position:relative; }
+    .process-steps::before {
+      content:'';position:absolute;top:1.5rem;left:2rem;right:2rem;height:1px;
+      background:linear-gradient(90deg,var(--accent),rgba(13,158,138,.2),transparent);
+      z-index:0;
+    }
+    .proc-step { position:relative;z-index:1; }
+    .proc-num {
+      font-family:'Bebas Neue',sans-serif;font-size:3rem;
+      color:rgba(13,158,138,.12);line-height:1;margin-bottom:.4rem;
+    }
+    .proc-dot {
+      width:12px;height:12px;background:var(--accent);border-radius:50%;
+      margin-bottom:1rem;box-shadow:0 0 10px rgba(13,158,138,.5);
+    }
+    .proc-step h3 { font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:.4rem; }
+    .proc-step p { font-size:.8rem;color:var(--text-dim);line-height:1.6;font-weight:300; }
+
+    /* ── TESTIMONIOS ─────────────────────────────────────── */
+    .testimonials { padding:6rem 3rem; }
+    .testimonials-inner { max-width:1200px;margin:0 auto; }
+    .testi-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem; }
+    .testi-card {
+      background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+      padding:2rem;transition:border-color .2s;
+    }
+    .testi-card:hover { border-color:var(--accent); }
+    .testi-stars { color:var(--gold);font-size:.85rem;letter-spacing:.1em;margin-bottom:1rem; }
+    .testi-quote {
+      font-family:'Bebas Neue',sans-serif;font-size:2.5rem;
+      color:var(--accent);line-height:1;margin-bottom:.4rem;opacity:.5;
+    }
+    .testi-text { font-size:.85rem;color:var(--text-mid);line-height:1.75;font-weight:300;font-style:italic;margin-bottom:1.5rem; }
+    .testi-author { display:flex;align-items:center;gap:.8rem; }
+    .testi-av {
+      width:34px;height:34px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:.78rem;color:var(--bg);flex-shrink:0;
+    }
+    .testi-name { font-size:.82rem;font-weight:600;color:var(--white); }
+    .testi-detail { font-size:.72rem;color:var(--text-dim); }
+
+    /* ── CTA FINAL ──────────────────────────────────────── */
+    .final-cta {
+      padding:8rem 3rem;text-align:center;position:relative;overflow:hidden;
+    }
+    .final-cta::before {
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 50% 50%,rgba(13,158,138,.1) 0%,transparent 65%);
+    }
+    .final-cta-inner { position:relative;z-index:1;max-width:680px;margin:0 auto; }
+    .final-cta h2 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(3rem,6vw,5.5rem);
+      line-height:.92;color:var(--white);margin:.8rem 0 1.5rem;
+    }
+    .final-cta h2 span { color:var(--accent); }
+    .final-cta p { font-size:.95rem;color:var(--text-mid);line-height:1.75;font-weight:300;margin-bottom:2.5rem; }
+    .final-actions { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background:var(--bg2);border-top:1px solid var(--border);
+      padding:2rem 3rem;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+    }
+    .footer-logo { font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.1em; }
+    .footer-logo em { color:var(--accent);font-style:normal; }
+    .footer-links { display:flex;gap:1.8rem;list-style:none; }
+    .footer-links a { color:var(--text-dim);text-decoration:none;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s; }
+    .footer-links a:hover { color:var(--white); }
+    .footer-copy { font-size:.7rem;color:var(--text-dim); }
+
+    /* ── REVEAL ─────────────────────────────────────────── */
+    .reveal { opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease; }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+
+    /* ── QUIZ / CAPTURA DE LEADS ─────────────────────────── */
+    .quiz-section {
+      padding:7rem 3rem;text-align:center;position:relative;overflow:hidden;
+      background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    }
+    .quiz-section::before {
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 50% 0%,rgba(13,158,138,.12) 0%,transparent 60%);
+      pointer-events:none;
+    }
+    .quiz-inner { position:relative;z-index:1;max-width:720px;margin:0 auto; }
+    .quiz-section .section-eye { justify-content:center; }
+    .quiz-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.6rem,6vw,4.6rem);
+      line-height:1;color:var(--white);margin:.8rem 0 1.3rem;
+    }
+    .quiz-title span { color:var(--accent); }
+    .quiz-subtitle { font-size:.95rem;color:var(--text-mid);line-height:1.75;font-weight:300;margin-bottom:2.2rem; }
+    .quiz-meta {
+      display:flex;align-items:center;justify-content:center;gap:1.6rem;
+      margin-top:2rem;flex-wrap:wrap;
+    }
+    .quiz-meta-item { display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--text-dim);letter-spacing:.04em; }
+    .quiz-meta-item .dot { width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0; }
+
+    /* ── MODAL OVERLAY ────────────────────────────────────── */
+    .quiz-modal-overlay {
+      position:fixed;inset:0;z-index:999;
+      background:rgba(4,8,9,.82);backdrop-filter:blur(6px);
+      display:flex;align-items:center;justify-content:center;
+      padding:1.2rem;
+      opacity:0;visibility:hidden;
+      transition:opacity .3s ease,visibility .3s ease;
+    }
+    .quiz-modal-overlay.open { opacity:1;visibility:visible; }
+    .quiz-modal {
+      background:var(--bg);border:1px solid var(--border-hi);border-radius:10px;
+      width:100%;max-width:620px;max-height:92vh;overflow-y:auto;
+      padding:2.4rem 2.2rem;position:relative;
+      box-shadow:0 30px 80px rgba(0,0,0,.6);
+      transform:translateY(24px) scale(.98);opacity:0;
+      transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s ease;
+    }
+    .quiz-modal-overlay.open .quiz-modal { transform:translateY(0) scale(1);opacity:1; }
+    .quiz-close {
+      position:absolute;top:1.2rem;right:1.2rem;
+      width:36px;height:36px;border-radius:50%;
+      background:var(--bg2);border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;color:var(--text-mid);font-size:1.1rem;line-height:1;
+      transition:border-color .2s,color .2s,transform .2s;
+      z-index:2;
+    }
+    .quiz-close:hover { border-color:var(--accent);color:var(--accent);transform:rotate(90deg); }
+
+    /* progress bar */
+    .quiz-progress-wrap { margin-bottom:1.8rem;padding-right:2.6rem; }
+    .quiz-progress-top {
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:.6rem;
+    }
+    .quiz-progress-label { font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim); }
+    .quiz-progress-pct { font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--accent); }
+    .quiz-progress-bar {
+      width:100%;height:5px;border-radius:100px;background:var(--bg3);
+      overflow:hidden;border:1px solid var(--border);
+    }
+    .quiz-progress-fill {
+      height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent2),var(--accent));
+      width:0%;transition:width .45s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* steps */
+    .quiz-steps-wrap { position:relative; }
+    .quiz-step {
+      display:none;
+    }
+    .quiz-step.active {
+      display:block;
+      animation:quizStepIn .45s cubic-bezier(.16,1,.3,1);
+    }
+    @keyframes quizStepIn {
+      from { opacity:0;transform:translateX(18px); }
+      to { opacity:1;transform:translateX(0); }
+    }
+    .quiz-eyebrow {
+      font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;
+    }
+    .quiz-eyebrow::before { content:'';width:14px;height:1.5px;background:var(--accent); }
+    .quiz-question {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.5rem,4vw,2.2rem);
+      color:var(--white);line-height:1.15;margin-bottom:1.6rem;
+    }
+    .quiz-options { display:flex;flex-direction:column;gap:.7rem; }
+    .quiz-option {
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+      width:100%;text-align:left;
+      padding:1rem 1.3rem;
+      background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+      color:var(--text);font-size:.9rem;font-weight:500;
+      cursor:pointer;transition:border-color .2s,background .2s,transform .15s;
+      font-family:'DM Sans',sans-serif;
+    }
+    .quiz-option:hover { border-color:var(--border-hi);background:var(--bg3);transform:translateX(2px); }
+    .quiz-option.selected {
+      border-color:var(--accent);background:rgba(13,158,138,.1);color:var(--white);
+    }
+    .quiz-option-arrow {
+      width:22px;height:22px;border-radius:50%;border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+      font-size:.7rem;color:var(--text-dim);transition:border-color .2s,color .2s,background .2s;
+    }
+    .quiz-option.selected .quiz-option-arrow {
+      border-color:var(--accent);background:var(--accent);color:var(--bg);
+    }
+
+    .quiz-nav {
+      display:flex;align-items:center;justify-content:space-between;
+      margin-top:1.8rem;gap:1rem;
+    }
+    .quiz-back {
+      background:transparent;border:1px solid var(--border-hi);color:var(--text-mid);
+      padding:.75rem 1.4rem;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+      border-radius:2px;cursor:pointer;transition:border-color .2s,color .2s;
+      font-family:'DM Sans',sans-serif;
+    }
+    .quiz-back:hover { border-color:var(--accent);color:var(--accent); }
+    .quiz-back:disabled { opacity:0;pointer-events:none; }
+    .quiz-step-count { font-size:.72rem;color:var(--text-dim);letter-spacing:.08em; }
+
+    /* lead capture step */
+    .quiz-lead-icon {
+      width:56px;height:56px;border-radius:50%;
+      background:rgba(13,158,138,.1);border:1px solid rgba(13,158,138,.3);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.6rem;margin-bottom:1.2rem;
+    }
+    .quiz-form { display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem; }
+    .quiz-input {
+      width:100%;padding:.9rem 1.1rem;
+      background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+      color:var(--white);font-size:.9rem;font-family:'DM Sans',sans-serif;
+      transition:border-color .2s,background .2s;
+    }
+    .quiz-input::placeholder { color:var(--text-dim); }
+    .quiz-input:focus { outline:none;border-color:var(--accent);background:var(--bg3); }
+    .quiz-form-error {
+      font-size:.75rem;color:#ef4444;display:none;
+    }
+    .quiz-form-error.show { display:block; }
+    .quiz-submit {
+      background:var(--accent);color:var(--bg);border:none;
+      padding:1rem 2rem;font-size:.82rem;font-weight:700;
+      letter-spacing:.12em;text-transform:uppercase;
+      border-radius:2px;cursor:pointer;
+      transition:background .2s,transform .15s;
+      margin-top:.4rem;font-family:'DM Sans',sans-serif;
+    }
+    .quiz-submit:hover { background:var(--accent2);transform:translateY(-2px); }
+    .quiz-privacy { font-size:.7rem;color:var(--text-dim);text-align:center;margin-top:.6rem; }
+
+    /* result step */
+    .quiz-result-tag {
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      padding:.3rem .9rem;border-radius:100px;
+      background:rgba(13,158,138,.1);border:1px solid rgba(13,158,138,.3);color:var(--accent);
+      margin-bottom:1rem;
+    }
+    .quiz-result-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.8rem,5vw,2.6rem);
+      color:var(--white);line-height:1.1;margin-bottom:1rem;
+    }
+    .quiz-result-desc { font-size:.9rem;color:var(--text-mid);line-height:1.75;font-weight:300;margin-bottom:1.4rem; }
+    .quiz-result-rec {
+      padding:1rem 1.2rem;
+      background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);border-radius:6px;
+      font-size:.85rem;color:var(--text-dim);line-height:1.6;margin-bottom:1.6rem;
+    }
+    .quiz-result-rec strong { color:var(--gold);font-weight:600; }
+    .quiz-result-offer {
+      background:var(--bg2);border:1px solid var(--border-hi);border-radius:8px;
+      padding:1.6rem;text-align:left;
+    }
+    .quiz-result-offer-label { font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.5rem; }
+    .quiz-result-offer-name {
+      font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);margin-bottom:.6rem;line-height:1.1;
+    }
+    .quiz-result-offer-desc { font-size:.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:1.2rem;font-weight:300; }
+
+    @media(max-width:600px){
+      .quiz-modal { padding:1.8rem 1.4rem;border-radius:8px; }
+      .quiz-progress-wrap { padding-right:2.2rem; }
+      .quiz-options { gap:.6rem; }
+      .quiz-option { padding:.85rem 1rem;font-size:.85rem; }
+      .quiz-nav { margin-top:1.4rem; }
+    }
+
+    /* Highlight del programa recomendado al volver del test */
+    .quiz-highlight {
+      animation: quizHighlightPulse 2.2s ease;
+    }
+    @keyframes quizHighlightPulse {
+      0%   { box-shadow:0 0 0 0 rgba(13,158,138,0); transform:translateY(0); }
+      15%  { box-shadow:0 0 0 4px rgba(13,158,138,.35); transform:translateY(-4px); }
+      50%  { box-shadow:0 0 0 4px rgba(13,158,138,.35); transform:translateY(-4px); }
+      100% { box-shadow:0 0 0 0 rgba(13,158,138,0); transform:translateY(0); }
+    }
+
+    /* ── BOTÓN "VER PRECIO" + MODAL DE PRECIO ────────────────────────── */
+    .btn-prog-price {
+      display:flex;align-items:center;justify-content:center;gap:.5rem;
+      width:100%;
+    }
+    .btn-prog-price .price-icon {
+      font-size:.85rem;opacity:.8;
+    }
+
+    .price-modal-overlay {
+      position:fixed;inset:0;z-index:999;
+      background:rgba(4,8,9,.82);backdrop-filter:blur(6px);
+      display:flex;align-items:center;justify-content:center;
+      padding:1.2rem;
+      opacity:0;visibility:hidden;
+      transition:opacity .3s ease,visibility .3s ease;
+    }
+    .price-modal-overlay.open { opacity:1;visibility:visible; }
+    .price-modal {
+      background:var(--bg);border:1px solid var(--border-hi);border-radius:10px;
+      width:100%;max-width:460px;max-height:90vh;overflow-y:auto;
+      padding:2.4rem 2.2rem;position:relative;
+      box-shadow:0 30px 80px rgba(0,0,0,.6);
+      transform:translateY(24px) scale(.98);opacity:0;
+      transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s ease;
+      text-align:center;
+    }
+    .price-modal-overlay.open .price-modal { transform:translateY(0) scale(1);opacity:1; }
+    .price-modal-close {
+      position:absolute;top:1.2rem;right:1.2rem;
+      width:36px;height:36px;border-radius:50%;
+      background:var(--bg2);border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;color:var(--text-mid);font-size:1.1rem;line-height:1;
+      transition:border-color .2s,color .2s,transform .2s;
+    }
+    .price-modal-close:hover { border-color:var(--accent);color:var(--accent);transform:rotate(90deg); }
+
+    .price-modal-level {
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      padding:.3rem .9rem;border-radius:100px;margin-bottom:1rem;
+    }
+    .price-modal-name {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.7rem,5vw,2.3rem);
+      color:var(--white);line-height:1.1;margin-bottom:1.4rem;
+    }
+    .price-modal-price-wrap {
+      padding:1.4rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      margin-bottom:1.4rem;
+    }
+    .price-modal-price-label { font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.4rem; }
+    .price-modal-price { font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--white);line-height:1; }
+    .price-modal-price em { color:var(--accent);font-style:normal;font-size:1.6rem;vertical-align:super; }
+    .price-modal-price-sub { font-size:.78rem;color:var(--text-dim);margin-top:.5rem; }
+    .price-modal-includes {
+      text-align:left;font-size:.82rem;color:var(--text-mid);line-height:1.7;
+      margin-bottom:1.6rem;font-weight:300;
+    }
+    .price-modal-includes strong { color:var(--white);font-weight:600; }
+    .price-modal-cta {
+      display:block;width:100%;text-align:center;
+    }
+
+
+    /* ── ACORDEÓN PROGRAMAS ──────────────────────────────── */
+    .programs-accordion-btn {
+      display:flex;align-items:center;justify-content:space-between;
+      width:100%;background:var(--bg2);border:1px solid var(--border);
+      border-radius:6px;padding:1.2rem 1.8rem;
+      cursor:pointer;transition:border-color .2s,background .2s;
+      margin-top:2rem;
+    }
+    .programs-accordion-btn:hover { border-color:var(--accent);background:#0a1a16; }
+    .prog-acc-left { display:flex;align-items:center;gap:1rem; }
+    .prog-acc-icon { font-size:1.4rem; }
+    .prog-acc-title {
+      font-family:'Bebas Neue',sans-serif;font-size:1.1rem;
+      letter-spacing:.08em;color:var(--white);
+    }
+    .prog-acc-meta { font-size:.72rem;color:var(--text-dim);margin-top:.15rem;letter-spacing:.04em; }
+    .prog-acc-arrow {
+      width:28px;height:28px;border:1px solid var(--border);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .35s ease,border-color .2s,background .2s;
+      flex-shrink:0;
+    }
+    .prog-acc-arrow svg { width:12px;height:12px;fill:none;stroke:var(--text-dim);stroke-width:2;transition:stroke .2s; }
+    .programs-accordion-btn[aria-expanded="true"] .prog-acc-arrow {
+      transform:rotate(180deg);border-color:var(--accent);background:rgba(13,158,138,.1);
+    }
+    .programs-accordion-btn[aria-expanded="true"] .prog-acc-arrow svg { stroke:var(--accent); }
+    .programs-accordion-btn[aria-expanded="true"] { border-color:var(--accent); }
+
+    .programs-accordion-body {
+      overflow:hidden;
+      max-height:0;
+      transition:max-height .5s cubic-bezier(.4,0,.2,1);
+    }
+    .programs-accordion-body.open { max-height:3000px; }
+
+    /* ── MOBILE ─────────────────────────────────────────── */
+    @media(max-width:900px){
+      nav { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .nav-hamburger { display:flex; }
+      .mobile-menu { display:flex; }
+      .hero { grid-template-columns:1fr;min-height:auto; }
+      .hero-left { padding:7rem 1.5rem 3rem; }
+      .hero-right { display:none; }
+      .hero-proof { gap:1.5rem; }
+      .vp-grid { grid-template-columns:1fr;gap:2.5rem; }
+      .sports-mosaic { grid-template-columns:repeat(4,1fr); }
+      .auth-grid { grid-template-columns:1fr;gap:2rem; }
+      .offer-grid { grid-template-columns:1fr; }
+      .offer-features { grid-template-columns:1fr 1fr; }
+      .offer-cta-block { flex-direction:column;align-items:flex-start; }
+      .offer-cta-actions { align-items:flex-start; }
+      .programs-grid { grid-template-columns:1fr; }
+      .presencial-card { grid-template-columns:1fr; }
+      .process-steps { grid-template-columns:1fr 1fr; }
+      .testi-grid { grid-template-columns:1fr; }
+      .value-prop,.programs,.presencial,.testimonials,.process,.main-offer,.final-cta { padding:4rem 1.5rem; }
+      footer { flex-direction:column;text-align:center; }
+      .proof-bar { gap:1.5rem;padding:1rem 1.5rem; }
+    }
+    @media(max-width:500px){
+      .sports-mosaic { grid-template-columns:repeat(4,1fr); }
+      .offer-features { grid-template-columns:1fr; }
+      .process-steps { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">agusvalen<em>.pf</em></a>
+  <ul class="nav-links">
+    <li><a href="#autoridad">Trayectoria</a></li>
+    <li><a href="#plan-online">Plan Online</a></li>
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#test-gratuito">Test gratuito</a></li>
+    <li><a href="#proceso">¿Cómo funciona?</a></li>
+    <li><a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="nav-cta">Escribime por DM</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-top">
+    <a href="#" class="nav-logo" onclick="closeMobileMenu()">agusvalen<em>.pf</em></a>
+  </div>
+  <ul class="mobile-menu-links">
+    <li><a href="#autoridad">Trayectoria</a></li>
+    <li><a href="#plan-online">Plan Online</a></li>
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#test-gratuito">Test gratuito</a></li>
+    <li><a href="#proceso">¿Cómo funciona?</a></li>
+    <li><a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+  <div class="mobile-menu-cta">
+    <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-primary">Escribime por Instagram →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Preparación Física · Ciencia del Rendimiento</div>
+    <h1 class="hero-title">
+      FUERZA, SALUD<br>
+      <span class="t-accent">Y RENDIMIENTO</span>
+      <span class="t-dim">EN CADA ETAPA DE TU VIDA, Y A TU NIVEL.</span>
+    </h1>
+    <p class="hero-value">
+      Aplicamos los mismos principios de <strong>preparación física de competencia</strong> para construir un cuerpo fuerte, ágil y libre de lesiones — adaptado a tus objetivos: ya sea ganar un campeonato, mejorar en tu deporte amateur o <strong>simplemente dominar tu día a día con vitalidad y salud real.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-primary">
+        📲 Iniciar mi plan por DM
+      </a>
+      <button class="btn-ghost work-vars-btn" id="workVarsBtn" aria-expanded="false" aria-controls="workVarsPanel">
+        Variables de trabajo
+        <svg class="work-vars-arrow" viewBox="0 0 12 12" width="10" height="10"><polyline points="2,4 6,8 10,4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+    </div>
+
+    <div class="work-vars-panel" id="workVarsPanel" role="region" aria-labelledby="workVarsBtn">
+      <div class="work-vars-inner">
+        <a href="#plan-online" class="work-vars-item">
+          <span class="wv-item-title">Plan Online Personalizado</span>
+          <span class="wv-item-desc">Seguimiento a distancia, ajustes semanales</span>
+        </a>
+        <a href="#programas" class="work-vars-item">
+          <span class="wv-item-title">Programas Descargables</span>
+          <span class="wv-item-desc">Planificaciones listas, pago único</span>
+        </a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="work-vars-item">
+          <span class="wv-item-title">Personalizado Presencial</span>
+          <span class="wv-item-desc">Entrenamiento 1 a 1 en Banfield</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-ghost-num">AV</div>
+    <svg class="hero-court-svg" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+      <rect x="60" y="80" width="480" height="560" rx="4" fill="none" stroke="white" stroke-width="2"/>
+      <line x1="60" y1="360" x2="540" y2="360" stroke="white" stroke-width="2"/>
+      <circle cx="300" cy="360" r="70" fill="none" stroke="white" stroke-width="2"/>
+      <circle cx="300" cy="360" r="8" fill="white" opacity=".3"/>
+      <rect x="180" y="80" width="240" height="170" rx="2" fill="none" stroke="white" stroke-width="2"/>
+      <rect x="180" y="490" width="240" height="150" rx="2" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M 180 175 A 70 70 0 0 1 420 175" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M 180 535 A 70 70 0 0 0 420 535" fill="none" stroke="white" stroke-width="2"/>
+    </svg>
+    <div class="hero-authority">
+      <div class="auth-label">Equipos activos 2025</div>
+      <div class="auth-teams">
+        <div class="auth-team">
+          <strong>Luz y Arte</strong>
+          <span>Básquet femenino</span>
+          <span class="league">Liga Metro · AFMB</span>
+        </div>
+        <div class="auth-team">
+          <strong>Defensores de Glew</strong>
+          <span>Masculino U21 + Primera</span>
+          <span class="league">Pre Liga · FEBAMBA</span>
+        </div>
+        <div class="auth-team">
+          <strong>Preparación Integral &amp; Longevidad</strong>
+          <span>Fuerza, salud y calidad de vida</span>
+          <span class="league">Salud Funcional</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item">🎓 <strong>Prof. Nac. de Educación Física</strong></div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">📚 <strong>Lic. Alto Rendimiento</strong> · UNLZ (en cursada)</div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">🏀 <strong>Preparador físico</strong> de equipos de competencia</div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">📍 <strong>Banfield, Buenos Aires</strong> · Online para todo el país</div>
+</div>
+
+<!-- ═══════════════════════════ PROPUESTA DE VALOR ═══════════════════════ -->
+<section class="value-prop" id="propuesta">
+  <div class="vp-grid">
+    <div>
+      <div class="section-eye reveal">Por qué trabajar conmigo</div>
+      <h2 class="vp-title reveal">METODOLOGÍA DE <span>ALTO RENDIMIENTO</span> PARA CADA OBJETIVO</h2>
+      <p class="vp-body reveal">
+        No soy un entrenador genérico con plantillas copiadas de internet. Aplico los mismos principios de <strong>periodización, control de carga y progresión</strong> que uso con equipos de competencia — adaptados a cada persona según su deporte, nivel y disponibilidad.
+      </p>
+      <p class="vp-body reveal">Trabajás con alguien que <strong>entiende el deporte desde adentro</strong>, con formación académica en alto rendimiento y experiencia real en cancha.</p>
+      <div class="differentiators reveal">
+        <div class="diff-item">
+          <div class="diff-icon">🎯</div>
+          <div class="diff-text">
+            <h4>Diagnóstico antes que rutina</h4>
+            <p>Evaluamos tu historial, objetivos y disponibilidad. Nada se escribe antes de entender qué necesitás.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">📈</div>
+          <div class="diff-text">
+            <h4>Progresión real, no aleatoria</h4>
+            <p>Cada semana tiene un propósito. La carga aumenta con lógica, no porque "toca cambiar".</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">🔁</div>
+          <div class="diff-text">
+            <h4>Seguimiento que no desaparece</h4>
+            <p>Ajustes semanales, contacto directo y revisiones reales. El programa evoluciona con vos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sports-block reveal">
+      <h3>TRABAJO CON TU DEPORTE</h3>
+      <div class="sports-mosaic">
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile hi"><span class="si">🏀</span><span class="sn">Básquet</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile"><span class="si">⚽</span><span class="sn">Fútbol</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile"><span class="si">🏐</span><span class="sn">Vóley</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile"><span class="si">🎾</span><span class="sn">Tenis</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile hi"><span class="si">💪</span><span class="sn">Fuerza Estética</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile hi"><span class="si">🌿</span><span class="sn">Longevidad</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile hi"><span class="si">🩹</span><span class="sn">Readaptación</span></a>
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="sport-tile"><span class="prog-badge">+</span><span class="si">🏅</span><span class="sn">Tu deporte</span></a>
+      </div>
+      <p style="font-size:.78rem;color:var(--text-dim);margin-top:1rem;line-height:1.6;">
+        Si tu deporte no está en la lista, escribime igual. El programa se construye desde las demandas físicas de cada disciplina, no desde planillas prediseñadas.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ AUTORIDAD ═══════════════════════════════ -->
+<section class="authority" id="autoridad">
+  <div class="auth-inner">
+    <div class="section-eye reveal">Trayectoria y formación</div>
+    <h2 class="vp-title reveal">LO QUE ME PONE EN <span>POSICIÓN DE AYUDARTE</span></h2>
+    <div class="auth-grid">
+      <div class="auth-creds reveal">
+        <div class="cred-card">
+          <div class="cred-label">Formación académica</div>
+          <div class="cred-value">Prof. Nacional de Educación Física</div>
+          <div class="cred-detail">Título oficial · Base científica que garantiza metodología segura y efectiva para cualquier persona, sin importar su nivel</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-label">Formación en curso</div>
+          <div class="cred-value">Lic. en Alto Rendimiento Deportivo</div>
+          <div class="cred-detail">Universidad Nacional de Lomas de Zamora (UNLZ) · Herramientas de periodización que optimizan el tiempo de entrenamiento y la composición corporal de cualquier atleta o persona activa</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-label">Experiencia deportiva</div>
+          <div class="cred-value">Jugador de básquet hasta los 20 años</div>
+          <div class="cred-detail">Comprendo el deporte y el cuerpo desde adentro — eso se traduce en programas que respetan los patrones de movimiento y previenen lesiones reales</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-label">Experiencia profesional</div>
+          <div class="cred-value">+4 años como preparador físico</div>
+          <div class="cred-detail">Trabajo con equipos de competencia, deportistas amateur y personas que entrenan por salud, fuerza estética o longevidad — la misma lógica científica, adaptada a cada objetivo</div>
+        </div>
+      </div>
+      <div class="auth-teams-full reveal">
+        <div class="team-card">
+          <div class="team-header">
+            <div class="team-name">Luz y Arte</div>
+            <div class="team-badge">Activo 2025</div>
+          </div>
+          <div class="team-detail">
+            Básquet <strong>femenino</strong>. Planificación anual, pretemporada, control de carga y recuperación en la <strong>Liga Metropolitana de la AFMB</strong>. El mismo trabajo de prevención de lesiones que aplico acá lo adapto para quien quiere entrenar fuerte sin romperse.
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-header">
+            <div class="team-name">Defensores de Glew</div>
+            <div class="team-badge">Activo 2025</div>
+          </div>
+          <div class="team-detail">
+            Básquet <strong>masculino</strong>, categorías <strong>U21 y Primera</strong> en la <strong>Pre Liga Metropolitana de FEBAMBA</strong>. Metodología de periodización diferenciada por categoría — la misma lógica de progresión que estructuro en los planes individuales para optimizar rendimiento sin comprometer la salud.
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-header">
+            <div class="team-name">Fuerza, Salud &amp; Longevidad</div>
+            <div class="team-badge">Online · Todo el país</div>
+          </div>
+          <div class="team-detail">
+            Trabajo con personas que <strong>no compiten en ningún equipo</strong> pero quieren resultados reales: mejorar composición corporal, ganar fuerza funcional, readaptar una lesión o simplemente moverse mejor durante décadas. La ciencia del rendimiento no es exclusiva de los atletas.
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-dim);line-height:1.6;padding:.8rem 0 0;">
+          Esta experiencia de competencia no es un detalle de marketing. Es lo que garantiza que cada programa tiene lógica deportiva real y criterios clínicos de prevención detrás — sin importar si tu objetivo es ganar un campeonato o vivir con más energía. <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:500;">Ver más en Instagram →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PLAN ONLINE (HERO PRODUCT) ══════════════════ -->
+<section class="main-offer" id="plan-online">
+  <div class="main-offer-inner">
+    <div class="offer-tag reveal">⭐ Servicio principal</div>
+    <h2 class="offer-title reveal">PLAN ONLINE<br><span>PERSONALIZADO</span></h2>
+    <p class="offer-subtitle reveal">
+      Un programa diseñado <strong>específicamente para vos</strong>, con seguimiento real semana a semana. No es una plantilla. No es un PDF genérico. Es tu programa.
+    </p>
+
+    <div class="offer-grid reveal">
+      <div class="offer-problem">
+        <div class="op-label">El problema con los programas genéricos</div>
+        <ul class="op-list">
+          <li>No tienen en cuenta tu historial ni lesiones previas</li>
+          <li>La progresión es arbitraria o no existe</li>
+          <li>Nadie ajusta el programa cuando algo no funciona</li>
+          <li>No están adaptados a tu deporte ni a tu objetivo real</li>
+          <li>Cuando tenés una duda, no hay nadie que responda</li>
+        </ul>
+      </div>
+      <div class="offer-solution">
+        <div class="op-label">Con el plan personalizado</div>
+        <ul class="op-list">
+          <li>Evaluación inicial completa antes de escribir una sola serie</li>
+          <li>Progresión planificada con lógica de periodización real</li>
+          <li>Ajustes semanales según cómo respondés al entrenamiento</li>
+          <li>Adaptado a tu deporte, nivel y disponibilidad horaria</li>
+          <li>DM de Instagram para consultas en tiempo real</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="offer-features reveal">
+      <div class="feat-item">
+        <div class="feat-icon">📋</div>
+        <div class="feat-title">Evaluación inicial</div>
+        <div class="feat-desc">Analizamos tu punto de partida antes de diseñar el programa</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">🗓</div>
+        <div class="feat-title">Programa mensual</div>
+        <div class="feat-desc">Renovado y ajustado cada mes según tu progreso real</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">🔄</div>
+        <div class="feat-title">Ajustes semanales</div>
+        <div class="feat-desc">Si algo no funciona o cambió tu situación, el programa cambia también</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">💬</div>
+        <div class="feat-title">DM de Instagram</div>
+        <div class="feat-desc">Canal abierto por DM para consultas técnicas, dudas de carga o feedback</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">📹</div>
+        <div class="feat-title">Videollamada mensual</div>
+        <div class="feat-desc">Revisión completa de métricas, sensaciones y objetivos del próximo ciclo</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title">Control de métricas</div>
+        <div class="feat-desc">Seguimiento de carga, progresión y evolución física a lo largo del tiempo</div>
+      </div>
+    </div>
+
+    <div class="offer-cta-block reveal" id="contacto">
+      <div class="offer-price-block">
+        <div class="offer-price-label">Inversión mensual</div>
+        <div class="offer-price"><em>$</em>30.000</div>
+        <div class="offer-price-sub">Por mes · Cancelás cuando quieras · Sin permanencia</div>
+      </div>
+      <div class="offer-cta-actions">
+        <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-wa">
+          📲 Quiero empezar este mes
+        </a>
+        <div class="offer-cta-note">Te respondo en menos de 24hs · Sin compromiso</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROGRAMAS DESCARGABLES ══════════════════════ -->
+<section class="programs" id="programas">
+  <div class="programs-inner">
+    <div class="programs-intro">
+      <div class="section-eye reveal">Programas descargables</div>
+      <h2 class="vp-title reveal">METODOLOGÍA DE <span>COMPETENCIA</span><br>EN TUS MANOS</h2>
+      <p class="vp-body reveal">Los mismos principios de periodización que aplico con equipos de Liga Metropolitana, estructurados en programas completos que podés seguir por tu cuenta. No son rutinas de internet. Son programas de entrenamiento reales.</p>
+      <a href="programas.html" class="btn-ghost reveal" style="margin-top:1.5rem;display:inline-block;">Ver catálogo completo →</a>
+    </div>
+
+
+    <!-- ACORDEÓN FITNESS GENERAL -->
+    <button class="programs-accordion-btn reveal" id="programsAccBtn" aria-expanded="false" aria-controls="programsAccBody">
+      <div class="prog-acc-left">
+        <span class="prog-acc-icon">💪</span>
+        <div>
+          <div class="prog-acc-title">PROGRAMAS DE FITNESS GENERAL — 3 DISPONIBLES</div>
+          <div class="prog-acc-meta">Principiante · Intermedio · Avanzado &nbsp;·&nbsp; Pago único · Descarga inmediata</div>
+        </div>
+      </div>
+      <div class="prog-acc-arrow">
+        <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+      </div>
+    </button>
+
+    <div class="programs-accordion-body" id="programsAccBody" role="region" aria-labelledby="programsAccBtn">
+      <div class="programs-grid programs-grid-3" style="margin-top:1.5rem;">
+
+        <!-- PRINCIPIANTE -->
+        <div class="prog-card card-princ">
+          <div class="prog-card-top">
+            <div class="prog-level">🟢 Nivel principiante</div>
+            <div class="prog-name">FITNESS GENERAL<br>PRINCIPIANTE</div>
+            <div class="prog-tagline prog-tagline-main">Para quien empieza a entrenar en serio y quiere hacerlo bien desde el principio.</div>
+          </div>
+          <div class="prog-card-body">
+            <div class="prog-problem">
+              <div class="prog-problem-label">¿Te identificás con esto?</div>
+              <div class="prog-problem-text">"Empecé varias veces pero nunca sé bien qué hacer, cómo progresar ni si estoy entrenando bien."</div>
+            </div>
+            <div class="prog-result">
+              <div class="prog-result-icon">🎯</div>
+              <div class="prog-result-text">Al terminar las 8 semanas vas a tener una base de fuerza real, una rutina que funciona y la confianza de saber exactamente qué estás haciendo y por qué.</div>
+            </div>
+            <div class="prog-phases">
+              <span class="phase-chip" style="color:#22c55e;border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);">SEM 1-2 · Adaptación</span>
+              <span class="phase-chip" style="color:#eab308;border-color:rgba(234,179,8,.3);background:rgba(234,179,8,.08);">SEM 3-4 · Base</span>
+              <span class="phase-chip" style="color:#f97316;border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.08);">SEM 5-6 · Desarrollo</span>
+              <span class="phase-chip" style="color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08);">SEM 7-8 · Intensif.</span>
+            </div>
+            <div class="prog-includes-label prog-includes-spacer">Qué incluye</div>
+            <ul class="prog-includes">
+              <li>8 semanas · 3 días por semana · Gimnasio completo</li>
+              <li>3 rutinas completas por semana con ejercicios, series, reps y descansos</li>
+              <li>Escala de intensidad visual (semáforo) en cada ejercicio</li>
+              <li>Tabla de registro de pesos por sesión y resumen semanal</li>
+              <li>Estructura completa de cada sesión paso a paso</li>
+              <li>Principios de nutrición e hidratación incluidos</li>
+              <li>Semana de descarga activa al final del ciclo</li>
+            </ul>
+            <div class="prog-vs">
+              <strong>¿Por qué no alcanza con una rutina gratis de internet?</strong> Porque una rutina genérica no tiene progresión planificada, no explica la intensidad correcta para cada ejercicio ni te da un sistema de seguimiento. Este programa tiene lógica de periodización real detrás de cada sesión.
+            </div>
+            <div class="prog-cta-row">
+              <button type="button" class="btn-prog btn-prog-price" data-price-program="princ"><span class="price-icon">💲</span> Ver precio</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERMEDIO -->
+        <div class="prog-card card-inter">
+          <div class="prog-card-top">
+            <div class="prog-level">🔵 Nivel intermedio</div>
+            <div class="prog-name">FITNESS GENERAL<br>INTERMEDIO</div>
+            <div class="prog-tagline prog-tagline-main">Para quien ya entrena hace al menos 6 meses y quiere resultados más exigentes.</div>
+          </div>
+          <div class="prog-card-body">
+            <div class="prog-problem">
+              <div class="prog-problem-label">¿Te identificás con esto?</div>
+              <div class="prog-problem-text">"Entreno hace meses pero siento que estoy estancado. No sé cuánto peso usar ni si mi esfuerzo es el correcto."</div>
+            </div>
+            <div class="prog-result">
+              <div class="prog-result-icon">🎯</div>
+              <div class="prog-result-text">Al terminar las 10 semanas vas a haber trabajado con progresión real de cargas, dominar el RPE y el RIR como herramientas de autoregulación, y tener una composición corporal notablemente mejorada.</div>
+            </div>
+            <div class="prog-phases">
+              <span class="phase-chip" style="color:#38bdf8;border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.08);">SEM 1-2 · Acum. I</span>
+              <span class="phase-chip" style="color:#84cc16;border-color:rgba(132,204,22,.3);background:rgba(132,204,22,.08);">SEM 3-4 · Acum. II</span>
+              <span class="phase-chip" style="color:#f97316;border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.08);">SEM 5-6 · Intens. I</span>
+              <span class="phase-chip" style="color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08);">SEM 7-8 · Intens. II</span>
+              <span class="phase-chip" style="color:#38bdf8;border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.08);">SEM 9-10 · Descarga</span>
+            </div>
+            <div class="prog-includes-label prog-includes-spacer">Qué incluye</div>
+            <ul class="prog-includes">
+              <li>10 semanas · 3 días por semana · Gimnasio completo</li>
+              <li>Sistema RPE + RIR explicado con tabla de equivalencias completa</li>
+              <li>Doble progresión: primero más reps, luego más carga</li>
+              <li>Técnicas avanzadas: drop sets, superseries, tempo lento</li>
+              <li>HIIT estructurado y Tabata en fases de intensificación</li>
+              <li>Tabla de registro de pesos por sesión y resumen por bloque</li>
+              <li>Semana de realización + descarga activa al final</li>
+            </ul>
+            <div class="prog-vs">
+              <strong>¿Qué tiene esto que no tiene una rutina de YouTube?</strong> Periodización en 5 fases, control de intensidad con RPE/RIR, técnicas de intensificación aplicadas con criterio y un sistema de registro que te permite saber exactamente si estás progresando.
+            </div>
+            <div class="prog-cta-row">
+              <button type="button" class="btn-prog btn-prog-price" data-price-program="inter"><span class="price-icon">💲</span> Ver precio</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVANZADO -->
+        <div class="prog-card card-avanz">
+          <div class="prog-card-top">
+            <div class="prog-level">🔥 Nivel avanzado</div>
+            <div class="prog-name">FITNESS GENERAL<br>AVANZADO</div>
+            <div class="prog-tagline prog-tagline-main">Para quien ya tiene base sólida y quiere perder grasa sin perder el músculo que construyó.</div>
+          </div>
+          <div class="prog-card-body">
+            <div class="prog-problem">
+              <div class="prog-problem-label">¿Te identificás con esto?</div>
+              <div class="prog-problem-text">"Entreno hace años, sé lo que hago, pero no logro bajar grasa sin perder fuerza ni músculo."</div>
+            </div>
+            <div class="prog-result">
+              <div class="prog-result-icon">🎯</div>
+              <div class="prog-result-text">Al terminar las 8 semanas vas a haber mejorado tu composición corporal con un déficit inteligente, sin perder rendimiento ni masa muscular.</div>
+            </div>
+            <div class="prog-phases">
+              <span class="phase-chip" style="color:#38bdf8;border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.08);">SEM 1-2 · Fuerza base</span>
+              <span class="phase-chip" style="color:#22c55e;border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);">SEM 3-4 · Acum. metab.</span>
+              <span class="phase-chip" style="color:#f97316;border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.08);">SEM 5-6 · Intensif.</span>
+              <span class="phase-chip" style="color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08);">SEM 7-8 · Pico + Deload</span>
+            </div>
+            <div class="prog-includes-label prog-includes-spacer">Qué incluye</div>
+            <ul class="prog-includes">
+              <li>8 semanas · 4 días por semana · Gimnasio completo</li>
+              <li>Split Upper/Lower con doble frecuencia por grupo muscular</li>
+              <li>Sistema combinado: %RM + RPE/RIR para máximo control</li>
+              <li>Supersets antagonistas en días de hipertrofia</li>
+              <li>Tabla de seguimiento: peso, cintura, cadera y bienestar</li>
+              <li>Registro de series por sesión y comparación por bloque</li>
+              <li>Semana de pico + deload activo obligatorio</li>
+            </ul>
+            <div class="prog-vs">
+              <strong>¿Por qué no alcanza con "comer menos y hacer cardio"?</strong> Porque sin estímulo de fuerza suficiente en déficit, el cuerpo pierde músculo junto con grasa. Este programa mantiene la tensión mecánica necesaria para retener lo que construiste.
+            </div>
+            <div class="prog-cta-row">
+              <button type="button" class="btn-prog btn-prog-price" data-price-program="avanz"><span class="price-icon">💲</span> Ver precio</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ACORDEÓN BÁSQUET -->
+    <button class="programs-accordion-btn reveal" id="baskAccBtn" aria-expanded="false" aria-controls="baskAccBody" style="margin-top:1rem;">
+      <div class="prog-acc-left">
+        <span class="prog-acc-icon">🏀</span>
+        <div>
+          <div class="prog-acc-title">PROGRAMAS DE BÁSQUET — 1 DISPONIBLE</div>
+          <div class="prog-acc-meta">Rendimiento deportivo · Salto vertical · Pago único · Descarga inmediata</div>
+        </div>
+      </div>
+      <div class="prog-acc-arrow">
+        <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+      </div>
+    </button>
+
+    <div class="programs-accordion-body" id="baskAccBody" role="region" aria-labelledby="baskAccBtn">
+      <div class="programs-grid programs-grid-1" style="margin-top:1.5rem;">
+
+        <!-- JUMP HIGHER FOUNDATION -->
+        <div class="prog-card card-jump">
+          <div class="prog-card-top">
+            <div class="prog-level">🏀 Básquet · Salto vertical</div>
+            <div class="prog-name">JUMP HIGHER<br>FOUNDATION</div>
+            <div class="prog-tagline prog-tagline-main">Programa de 8 semanas para aumentar tu salto vertical y mejorar tu potencia en cancha.</div>
+          </div>
+          <div class="prog-card-body">
+            <div class="prog-problem">
+              <div class="prog-problem-label">¿Te identificás con esto?</div>
+              <div class="prog-problem-text">"Quiero saltar más alto pero no sé cómo entrenar específicamente para eso sin romperme en el intento."</div>
+            </div>
+            <div class="prog-result">
+              <div class="prog-result-icon">🎯</div>
+              <div class="prog-result-text">Al terminar las 8 semanas vas a tener una base sólida de fuerza y potencia de piernas, mejor técnica de salto y aterrizaje, y una diferencia medible en tu CMJ y Abalakov.</div>
+            </div>
+            <div class="prog-phases">
+              <span class="phase-chip" style="color:#a78bfa;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08);">SEM 1-2 · Técnica base</span>
+              <span class="phase-chip" style="color:#22c55e;border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);">SEM 3-4 · Fuerza</span>
+              <span class="phase-chip" style="color:#f97316;border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.08);">SEM 5-6 · Potencia</span>
+              <span class="phase-chip" style="color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08);">SEM 7-8 · Expresión</span>
+            </div>
+            <div class="prog-includes-label prog-includes-spacer">Qué incluye</div>
+            <ul class="prog-includes">
+              <li>8 semanas · 2 entrenos por semana · Compatible con partidos</li>
+              <li>Evaluación inicial y final con test CMJ y Abalakov</li>
+              <li>Guía completa de calentamiento específico</li>
+              <li>Combinación de fuerza, pliometría y técnica de salto</li>
+              <li>Sistema de progresión guiado con cargas por RPE</li>
+              <li>Tabla de seguimiento de progreso semanal</li>
+              <li>Adaptado a gimnasios funcionales, CrossFit o convencionales</li>
+            </ul>
+            <div class="prog-vs">
+              <strong>¿Para quién es este programa?</strong> Para jugadores de básquet de 13 a 19 años con poca o moderada experiencia en fuerza que quieran mejorar su salto vertical con un sistema progresivo y seguro — basado en los mismos principios que uso con equipos de competencia.
+            </div>
+            <div class="prog-cta-row">
+              <button type="button" class="btn-prog btn-prog-price btn-jump" data-price-program="jump"><span class="price-icon">💲</span> Ver precio</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ QUIZ / CAPTURA DE LEADS ═══════════════════ -->
+<section class="quiz-section" id="test-gratuito">
+  <div class="quiz-inner">
+    <div class="section-eye reveal">Diagnóstico gratuito · 60 segundos</div>
+    <h2 class="quiz-title reveal">DESCUBRÍ QUÉ ESTÁ <span>FRENANDO TU PROGRESO</span></h2>
+    <p class="quiz-subtitle reveal">
+      Respondé un test gratuito de 60 segundos y descubrí cuál es el principal factor que está limitando tus resultados en fuerza, rendimiento, composición corporal o salud.
+    </p>
+    <button class="btn-primary reveal" id="openQuizBtn" type="button">Comenzar test gratuito</button>
+    <div class="quiz-meta reveal">
+      <div class="quiz-meta-item"><span class="dot"></span> 8 preguntas</div>
+      <div class="quiz-meta-item"><span class="dot"></span> Resultado personalizado</div>
+      <div class="quiz-meta-item"><span class="dot"></span> 100% gratuito</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ MODAL DEL TEST ════════════════════════════ -->
+<div class="quiz-modal-overlay" id="quizOverlay" role="dialog" aria-modal="true" aria-label="Test de diagnóstico">
+  <div class="quiz-modal">
+    <button class="quiz-close" id="quizCloseBtn" aria-label="Cerrar">✕</button>
+
+    <!-- Barra de progreso -->
+    <div class="quiz-progress-wrap" id="quizProgressWrap">
+      <div class="quiz-progress-top">
+        <span class="quiz-progress-label" id="quizProgressLabel">Pregunta 1 de 8</span>
+        <span class="quiz-progress-pct" id="quizProgressPct">0%</span>
+      </div>
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+    </div>
+
+    <div class="quiz-steps-wrap" id="quizStepsWrap">
+
+      <!-- Pregunta 1 -->
+      <div class="quiz-step active" data-step="0" data-question="0">
+        <div class="quiz-eyebrow">Objetivo</div>
+        <h3 class="quiz-question">¿Cuál es tu principal objetivo?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="fuerza">Ganar fuerza<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="rendimiento">Mejorar rendimiento deportivo<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="grasa">Bajar grasa<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="musculo">Ganar masa muscular<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="salud">Mejorar salud<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="quiz-step" data-step="1" data-question="1">
+        <div class="quiz-eyebrow">Frecuencia</div>
+        <h3 class="quiz-question">¿Cuántos días entrenás por semana?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="0-1">0-1<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="2-3">2-3<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="4-5">4-5<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="6+">6+<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="quiz-step" data-step="2" data-question="2">
+        <div class="quiz-eyebrow">Planificación</div>
+        <h3 class="quiz-question">¿Seguís una planificación?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="siempre">Sí, siempre<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="masomenos">Más o menos<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="no">No<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div class="quiz-step" data-step="3" data-question="3">
+        <div class="quiz-eyebrow">Experiencia</div>
+        <h3 class="quiz-question">¿Cuánto tiempo llevás entrenando?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="menos6m">Menos de 6 meses<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="6m-2a">6 meses a 2 años<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="mas2a">Más de 2 años<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 5 -->
+      <div class="quiz-step" data-step="4" data-question="4">
+        <div class="quiz-eyebrow">Progresión</div>
+        <h3 class="quiz-question">¿Hace cuánto no cambiás tu programa?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="menos1m">Menos de 1 mes<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="1-3m">1-3 meses<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="mas3m">Más de 3 meses<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="sinprograma">No tengo programa<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 6 -->
+      <div class="quiz-step" data-step="5" data-question="5">
+        <div class="quiz-eyebrow">Recuperación</div>
+        <h3 class="quiz-question">¿Cuántas horas dormís?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="menos6">Menos de 6<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="6-7">6-7<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="7-8">7-8<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="mas8">Más de 8<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 7 -->
+      <div class="quiz-step" data-step="6" data-question="6">
+        <div class="quiz-eyebrow">Progreso actual</div>
+        <h3 class="quiz-question">¿Cómo describirías tu progreso actual?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="muybueno">Muy bueno<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="bueno">Bueno<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="estancado">Estancado<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="retrocediendo">Retrocediendo<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Pregunta 8 -->
+      <div class="quiz-step" data-step="7" data-question="7">
+        <div class="quiz-eyebrow">Mayor obstáculo</div>
+        <h3 class="quiz-question">¿Qué te cuesta más?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" data-value="constancia">Constancia<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="organizacion">Organización<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="tecnica">Técnica<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="fuerza">Fuerza<span class="quiz-option-arrow">→</span></button>
+          <button class="quiz-option" data-value="recuperacion">Recuperación<span class="quiz-option-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- Paso de captura de lead -->
+      <div class="quiz-step" data-step="8">
+        <div class="quiz-lead-icon">🔓</div>
+        <div class="quiz-eyebrow">Tengo tu resultado listo</div>
+        <h3 class="quiz-question">Ingresá tus datos para desbloquear tu diagnóstico</h3>
+        <p class="quiz-subtitle" style="text-align:left;margin-bottom:0;">
+          Ingresá tus datos para desbloquear tu diagnóstico personalizado y recibir recomendaciones específicas.
+        </p>
+        <div class="quiz-form">
+          <input type="text" class="quiz-input" id="quizName" placeholder="Nombre" autocomplete="name">
+          <input type="email" class="quiz-input" id="quizEmail" placeholder="Email" autocomplete="email">
+          <input type="tel" class="quiz-input" id="quizWhatsapp" placeholder="WhatsApp" autocomplete="tel">
+          <span class="quiz-form-error" id="quizFormError">Completá los tres campos para ver tu resultado.</span>
+          <button class="quiz-submit" id="quizSubmitBtn" type="button">Ver mi resultado</button>
+          <p class="quiz-privacy">Tus datos están seguros. No hacemos spam.</p>
+        </div>
+      </div>
+
+      <!-- Paso de resultado -->
+      <div class="quiz-step" data-step="9">
+        <div class="quiz-result-tag" id="quizResultTag">Tu plan recomendado</div>
+        <h3 class="quiz-result-title" id="quizResultTitle">—</h3>
+        <p class="quiz-result-desc" id="quizResultDesc">—</p>
+        <div class="quiz-result-rec" id="quizResultRec"><strong>Recomendación:</strong> —</div>
+        <div class="quiz-result-offer">
+          <div class="quiz-result-offer-label">Para vos recomiendo</div>
+          <div class="quiz-result-offer-name" id="quizOfferName">—</div>
+          <p class="quiz-result-offer-desc" id="quizOfferDesc">—</p>
+          <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-primary" id="quizOfferBtn" style="width:100%;text-align:center;display:block;">Ver programa</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navegación -->
+    <div class="quiz-nav" id="quizNav">
+      <button class="quiz-back" id="quizBackBtn" disabled>← Atrás</button>
+      <span class="quiz-step-count" id="quizStepCount">Paso 1 de 8</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ MODAL DE PRECIO ═══════════════════════════ -->
+<div class="price-modal-overlay" id="priceModalOverlay" role="dialog" aria-modal="true" aria-label="Información de precio">
+  <div class="price-modal">
+    <button class="price-modal-close" id="priceModalClose" aria-label="Cerrar">✕</button>
+    <div class="price-modal-level" id="priceModalLevel">—</div>
+    <div class="price-modal-name" id="priceModalName">—</div>
+    <div class="price-modal-price-wrap">
+      <div class="price-modal-price-label">Precio</div>
+      <div class="price-modal-price" id="priceModalPrice"><em>$</em>20.000</div>
+      <div class="price-modal-price-sub" id="priceModalSub">Pago único · Descarga inmediata</div>
+    </div>
+    <div class="price-modal-includes" id="priceModalIncludes">—</div>
+    <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-primary price-modal-cta" id="priceModalCta">Quiero este programa →</a>
+  </div>
+</div>
+
+<!-- ═════════════════════════ PRESENCIAL ════════════════════════════════ -->
+<section class="presencial">
+  <div class="presencial-card reveal">
+    <div class="pres-left">
+      <div class="section-eye" style="margin-bottom:.8rem;">Banfield, Buenos Aires</div>
+      <h3>ENTRENAMIENTO<br>PRESENCIAL</h3>
+      <p>Sesiones individuales con corrección técnica en tiempo real. Trabajo cuerpo a cuerpo aplicando los mismos criterios metodológicos que uso con equipos de competencia.</p>
+      <div class="pres-details">
+        <div class="pres-detail">📍 <strong>Banfield</strong>, zona sur del Gran Buenos Aires</div>
+        <div class="pres-detail">🏋 Individual o grupos reducidos (máx. 3 personas)</div>
+        <div class="pres-detail">🎯 Para cualquier deporte o fitness general</div>
+        <div class="pres-detail">📦 Packs de sesiones con descuento disponibles</div>
+      </div>
+    </div>
+    <div class="pres-right">
+      <div class="pres-price-label">Precio por sesión</div>
+      <div class="pres-price"><em>$</em>20.000</div>
+      <div class="pres-price-sub">Por sesión individual · Packs disponibles</div>
+      <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;">
+        📲 Consultar por Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ PROCESO ══════════════════════════════════ -->
+<section class="process" id="proceso">
+  <div class="process-inner">
+    <div class="section-eye reveal">¿Cómo funciona?</div>
+    <h2 class="vp-title reveal">DE <span>CERO A TU PROGRAMA</span><br>EN 4 PASOS</h2>
+    <div class="process-steps">
+      <div class="proc-step reveal">
+        <div class="proc-num">01</div>
+        <div class="proc-dot"></div>
+        <h3>Me escribís</h3>
+        <p>Por Instagram. Escribime un DM con tus objetivos, deporte, experiencia y disponibilidad horaria.</p>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-num">02</div>
+        <div class="proc-dot"></div>
+        <h3>Evaluación inicial</h3>
+        <p>Analizamos tu historial de entrenamiento, lesiones previas y metas reales a corto y largo plazo.</p>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-num">03</div>
+        <div class="proc-dot"></div>
+        <h3>Recibís tu programa</h3>
+        <p>En menos de 48hs tenés tu plan completo listo para arrancar, con toda la información necesaria.</p>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-num">04</div>
+        <div class="proc-dot"></div>
+        <h3>Seguimiento real</h3>
+        <p>Ajustes semanales, revisiones mensuales y contacto directo. El programa evoluciona con vos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ TESTIMONIOS ════════════════════════════════ -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-eye reveal">Lo que dicen quienes ya entrenan</div>
+    <h2 class="vp-title reveal">RESULTADOS <span>REALES</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Empecé sin saber nada de entrenamiento y en tres meses noté cambios reales. Agus siempre disponible y con ganas de que mejores. No es uno más que te manda un PDF y desaparece.</p>
+        <div class="testi-author">
+          <div class="testi-av">MG</div>
+          <div>
+            <div class="testi-name">Martín G.</div>
+            <div class="testi-detail">Plan online personalizado</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Como jugador de básquet amateur necesitaba algo específico para el deporte. El programa mejoró mi explosividad y resistencia notablemente en la temporada. Se nota la diferencia con alguien que conoce el deporte.</p>
+        <div class="testi-author">
+          <div class="testi-av">LS</div>
+          <div>
+            <div class="testi-name">Lucas S.</div>
+            <div class="testi-detail">Programa descargable básquet</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Las sesiones presenciales son de muy buen nivel. Se nota que trabaja con equipos, la metodología es completamente distinta a un entrenador de gimnasio convencional.</p>
+        <div class="testi-author">
+          <div class="testi-av">VP</div>
+          <div>
+            <div class="testi-name">Valentina P.</div>
+            <div class="testi-detail">Entrenamiento presencial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ CTA FINAL ════════════════════════════════ -->
+<section class="final-cta" id="final-contacto">
+  <div class="final-cta-inner">
+    <div class="section-eye reveal" style="justify-content:center;">¿Listo para empezar?</div>
+    <h2 class="reveal">EL PRÓXIMO CICLO<br>EMPIEZA <span>CUANDO VOS DECIDAS</span></h2>
+    <p class="reveal">Escribime por Instagram y en menos de 24hs hablamos de tu caso, tu objetivo y qué plan tiene más sentido para vos. Sin compromiso.</p>
+    <div class="final-actions reveal">
+      <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-wa">
+        📲 Escribime por Instagram
+      </a>
+      <a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener" class="btn-ghost">
+        📲 @agusvalen.pf
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">agusvalen<em>.pf</em> <span style="color:var(--text-dim);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.05em;">· Preparación Física</span></div>
+  <ul class="footer-links">
+    <li><a href="#propuesta">Propuesta</a></li>
+    <li><a href="#plan-online">Plan Online</a></li>
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="https://instagram.com/agusvalen.pf" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 agusvalen.pf · Banfield, Buenos Aires · Argentina</span>
+</footer>
+
+<script>
+  // ── ACORDEÓN PROGRAMAS
+  function setupAccordion(btnId, bodyId) {
+    const accBtn = document.getElementById(btnId);
+    const accBody = document.getElementById(bodyId);
+    if (accBtn && accBody) {
+      accBtn.addEventListener('click', () => {
+        const isOpen = accBody.classList.contains('open');
+        accBody.classList.toggle('open', !isOpen);
+        accBtn.setAttribute('aria-expanded', String(!isOpen));
+        if (!isOpen) {
+          setTimeout(() => accBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+        }
+      });
+    }
+  }
+  setupAccordion('programsAccBtn', 'programsAccBody');
+  setupAccordion('baskAccBtn', 'baskAccBody');
+
+  // ── ACORDEÓN VARIABLES DE TRABAJO
+  const workVarsBtn = document.getElementById('workVarsBtn');
+  const workVarsPanel = document.getElementById('workVarsPanel');
+  if (workVarsBtn && workVarsPanel) {
+    workVarsBtn.addEventListener('click', () => {
+      const isOpen = workVarsPanel.classList.contains('open');
+      workVarsPanel.classList.toggle('open', !isOpen);
+      workVarsBtn.classList.toggle('open', !isOpen);
+      workVarsBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMobileMenu() {
+    hamburgerBtn.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded','false');
+    mobileMenu.classList.remove('open');
+    mobileMenu.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function openMobileMenu() {
+    hamburgerBtn.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded','true');
+    mobileMenu.classList.add('open');
+    mobileMenu.style.pointerEvents = 'all';
+    document.body.style.overflow = 'hidden';
+  }
+
+  hamburgerBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('open')) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  // Handle internal links inside mobile menu
+  mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const targetId = link.getAttribute('href');
+      closeMobileMenu();
+      setTimeout(() => {
+        const target = document.querySelector(targetId);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 350);
+      return false;
+    });
+  });
+
+  // Handle all other internal anchor links on the page
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    if (link.closest('#mobileMenu')) return; // already handled above
+    link.addEventListener('click', e => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu();
+  });
+
+  // ── QUIZ DE DIAGNÓSTICO ──────────────────────────────────────────────
+  (function() {
+    const overlay = document.getElementById('quizOverlay');
+    const openBtn = document.getElementById('openQuizBtn');
+    const closeBtn = document.getElementById('quizCloseBtn');
+    const steps = Array.from(document.querySelectorAll('.quiz-step'));
+    const totalQuestions = 8; // pasos 0-7 son preguntas, 8 = lead, 9 = resultado
+    const progressFill = document.getElementById('quizProgressFill');
+    const progressPct = document.getElementById('quizProgressPct');
+    const progressLabel = document.getElementById('quizProgressLabel');
+    const progressWrap = document.getElementById('quizProgressWrap');
+    const backBtn = document.getElementById('quizBackBtn');
+    const stepCount = document.getElementById('quizStepCount');
+    const navWrap = document.getElementById('quizNav');
+
+    let currentStep = 0;
+    const answers = {}; // { questionIndex: value }
+
+    // ── Resultados posibles: cada uno mapea a un programa concreto
+    const RESULTS = {
+      principiante: {
+        title: 'Tu mejor punto de partida: una base sólida',
+        desc: 'Lo que más va a impactar tu progreso ahora es construir una base de fuerza técnica, con una progresión clara semana a semana. Antes de sumar intensidad o complejidad, necesitás cimientos firmes.',
+        rec: 'Un programa estructurado de base, con ejercicios fundamentales bien ejecutados y progresión planificada, es el cambio que más impacto va a tener en tus próximas 8 semanas.',
+        offer: {
+          name: 'Programa Fitness Principiante',
+          desc: '8 semanas de rutinas completas, progresión planificada paso a paso y sistema de registro para construir una base sólida de fuerza y técnica.',
+          btn: 'Ver programa',
+          anchor: '.card-princ'
+        }
+      },
+      intermedio: {
+        title: 'Estás listo para un salto de nivel',
+        desc: 'Ya tenés base y constancia, pero tu entrenamiento actual no te está exigiendo lo suficiente como para seguir progresando. Es momento de un programa con mayor control de intensidad y técnicas más avanzadas.',
+        rec: 'Necesitás un sistema de progresión más exigente: control de intensidad con RPE/RIR, variación planificada de estímulos y bloques con objetivos específicos por fase.',
+        offer: {
+          name: 'Programa Fitness Intermedio',
+          desc: '10 semanas con periodización en fases, sistema RPE/RIR y técnicas de intensificación para volver a generar adaptaciones y romper el estancamiento.',
+          btn: 'Ver programa',
+          anchor: '.card-inter'
+        }
+      },
+      avanzado: {
+        title: 'Tu objetivo pide precisión: definición sin perder músculo',
+        desc: 'Tu perfil indica que ya tenés una base entrenada importante y tu prioridad es la composición corporal. El riesgo en esta etapa es perder masa muscular junto con la grasa si el estímulo de fuerza no está bien calibrado.',
+        rec: 'Un programa que mantenga la tensión mecánica necesaria mientras ajustás tu composición corporal, con seguimiento de métricas además del peso, es lo que necesitás.',
+        offer: {
+          name: 'Programa Fitness Avanzado',
+          desc: '8 semanas de split Upper/Lower con doble frecuencia, sistema combinado %RM + RPE/RIR y seguimiento de composición corporal para definir sin perder lo construido.',
+          btn: 'Ver programa',
+          anchor: '.card-avanz'
+        }
+      },
+      online: {
+        title: 'Lo que necesitás es acompañamiento personalizado',
+        desc: 'Tu situación tiene varias variables en juego (recuperación, distribución de cargas, organización) que un programa genérico no puede resolver del todo. Necesitás ajustes constantes basados en cómo responde tu cuerpo semana a semana.',
+        rec: 'Un seguimiento directo, con ajustes de carga, volumen y recuperación según tu progreso real, es lo que va a destrabar tu situación de forma más efectiva.',
+        offer: {
+          name: 'Plan Online Personalizado',
+          desc: 'Acompañamiento directo con ajuste continuo de tu entrenamiento según tu progreso, tu recuperación y tu rutina real, con seguimiento semanal.',
+          btn: 'Quiero acompañamiento',
+          anchor: '#plan-online'
+        }
+      }
+    };
+
+    // ── Lógica de clasificación: mapea las 8 respuestas a uno de los 4 planes
+    function classify() {
+      const scores = {
+        principiante: 0,
+        intermedio: 0,
+        avanzado: 0,
+        online: 0
+      };
+
+      const objetivo = answers[0];          // fuerza, rendimiento, grasa, musculo, salud
+      const diasSemana = answers[1];        // 0-1, 2-3, 4-5, 6+
+      const planificacion = answers[2];     // siempre, masomenos, no
+      const experiencia = answers[3];       // menos6m, 6m-2a, mas2a
+      const tiempoSinCambiar = answers[4];  // menos1m, 1-3m, mas3m, sinprograma
+      const sueno = answers[5];             // menos6, 6-7, 7-8, mas8
+      const progresoActual = answers[6];    // muybueno, bueno, estancado, retrocediendo
+      const obstaculo = answers[7];         // constancia, organizacion, tecnica, fuerza, recuperacion
+
+      // ── Experiencia: principal driver de nivel
+      if (experiencia === 'menos6m') scores.principiante += 4;
+      if (experiencia === '6m-2a') scores.intermedio += 3;
+      if (experiencia === 'mas2a') { scores.intermedio += 1; scores.avanzado += 3; }
+
+      // ── Sin planificación o sin programa → principiante (necesita base y estructura)
+      if (planificacion === 'no') scores.principiante += 2;
+      if (tiempoSinCambiar === 'sinprograma') scores.principiante += 2;
+
+      // ── Objetivo: bajar grasa con base entrenada → avanzado (definición)
+      if (objetivo === 'grasa' && experiencia !== 'menos6m') scores.avanzado += 2;
+      if (objetivo === 'musculo') scores.intermedio += 1;
+      if (objetivo === 'fuerza' || objetivo === 'rendimiento') scores.intermedio += 1;
+      if (objetivo === 'salud' && experiencia === 'menos6m') scores.principiante += 1;
+
+      // ── Estancado/retrocediendo con experiencia → necesita salto de nivel o acompañamiento
+      if (progresoActual === 'estancado') {
+        scores.intermedio += 2;
+        if (experiencia === 'mas2a') scores.avanzado += 1;
+      }
+      if (progresoActual === 'retrocediendo') scores.online += 3;
+
+      // ── Múltiples variables en juego (recuperación + organización + constancia) → plan online
+      if (obstaculo === 'recuperacion' && sueno === 'menos6') scores.online += 3;
+      if (obstaculo === 'organizacion' && planificacion !== 'siempre') scores.online += 2;
+      if (obstaculo === 'constancia' && diasSemana !== '0-1') scores.online += 1;
+
+      // ── Mucha frecuencia + mal descanso → plan online para ajustar cargas/recuperación
+      if ((diasSemana === '4-5' || diasSemana === '6+') && (sueno === 'menos6' || sueno === '6-7')) {
+        scores.online += 2;
+      }
+
+      // ── Buena planificación + progreso bueno/muy bueno + experiencia → avanzado
+      if (planificacion === 'siempre' && (progresoActual === 'bueno' || progresoActual === 'muybueno') && experiencia !== 'menos6m') {
+        scores.avanzado += 1;
+      }
+
+      // ── Encontrar el plan con mayor score
+      let best = 'principiante';
+      let bestScore = -1;
+      Object.keys(scores).forEach(key => {
+        if (scores[key] > bestScore) { bestScore = scores[key]; best = key; }
+      });
+      return best;
+    }
+
+
+    // ── Navegación entre pasos
+    function goToStep(stepIndex) {
+      currentStep = stepIndex;
+      steps.forEach(s => s.classList.remove('active'));
+      const target = steps.find(s => parseInt(s.dataset.step) === stepIndex);
+      if (target) target.classList.add('active');
+
+      // Progreso
+      if (stepIndex < totalQuestions) {
+        const pct = Math.round((stepIndex / totalQuestions) * 100);
+        progressFill.style.width = pct + '%';
+        progressPct.textContent = pct + '%';
+        progressLabel.textContent = `Pregunta ${stepIndex + 1} de ${totalQuestions}`;
+        progressWrap.style.display = '';
+      } else if (stepIndex === totalQuestions) {
+        progressFill.style.width = '100%';
+        progressPct.textContent = '100%';
+        progressLabel.textContent = 'Último paso';
+        progressWrap.style.display = '';
+      } else {
+        progressWrap.style.display = 'none';
+      }
+
+      // Nav (back / contador)
+      if (stepIndex >= totalQuestions) {
+        navWrap.style.display = 'none';
+      } else {
+        navWrap.style.display = '';
+        backBtn.disabled = stepIndex === 0;
+        stepCount.textContent = `Paso ${stepIndex + 1} de ${totalQuestions}`;
+      }
+    }
+
+    // ── Avanzar automáticamente al elegir una opción
+    steps.forEach(step => {
+      const qIndex = step.dataset.question;
+      if (qIndex === undefined) return;
+      const options = step.querySelectorAll('.quiz-option');
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          options.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          answers[parseInt(qIndex)] = opt.dataset.value;
+          setTimeout(() => {
+            if (currentStep < totalQuestions - 1) {
+              goToStep(currentStep + 1);
+            } else {
+              goToStep(totalQuestions); // ir al paso de captura de lead
+            }
+          }, 280);
+        });
+      });
+    });
+
+    // ── Botón atrás
+    backBtn.addEventListener('click', () => {
+      if (currentStep > 0) goToStep(currentStep - 1);
+    });
+
+    // ── Captura de lead
+    const nameInput = document.getElementById('quizName');
+    const emailInput = document.getElementById('quizEmail');
+    const waInput = document.getElementById('quizWhatsapp');
+    const formError = document.getElementById('quizFormError');
+    const submitBtn = document.getElementById('quizSubmitBtn');
+
+    submitBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const wa = waInput.value.trim();
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!name || !email || !wa || !emailValid) {
+        formError.classList.add('show');
+        return;
+      }
+      formError.classList.remove('show');
+
+      // Guardar lead (placeholder - acá se puede integrar con un endpoint/Sheets/CRM)
+      const lead = { name, email, whatsapp: wa, answers, timestamp: new Date().toISOString() };
+      try { localStorage.setItem('agusvalen_lead', JSON.stringify(lead)); } catch(e) {}
+
+      // Clasificar y mostrar resultado
+      const category = classify();
+      const result = RESULTS[category];
+
+      document.getElementById('quizResultTitle').textContent = result.title;
+      document.getElementById('quizResultDesc').textContent = result.desc;
+      document.getElementById('quizResultRec').innerHTML = `<strong>Recomendación:</strong> ${result.rec}`;
+      document.getElementById('quizOfferName').textContent = result.offer.name;
+      document.getElementById('quizOfferDesc').textContent = result.offer.desc;
+      const offerBtn = document.getElementById('quizOfferBtn');
+      offerBtn.textContent = result.offer.btn;
+      offerBtn.removeAttribute('href');
+      offerBtn.removeAttribute('target');
+      offerBtn.removeAttribute('rel');
+      offerBtn.onclick = (e) => {
+        e.preventDefault();
+        closeQuiz();
+        setTimeout(() => {
+          const targetEl = document.querySelector(result.offer.anchor);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetEl.classList.add('quiz-highlight');
+            setTimeout(() => targetEl.classList.remove('quiz-highlight'), 2200);
+          }
+        }, 350);
+      };
+
+      goToStep(totalQuestions + 1);
+    });
+
+    // ── Abrir / cerrar modal
+    function openQuiz() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // reset al abrir
+      Object.keys(answers).forEach(k => delete answers[k]);
+      document.querySelectorAll('.quiz-option.selected').forEach(o => o.classList.remove('selected'));
+      nameInput.value = ''; emailInput.value = ''; waInput.value = '';
+      formError.classList.remove('show');
+      goToStep(0);
+    }
+    function closeQuiz() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    openBtn.addEventListener('click', openQuiz);
+    closeBtn.addEventListener('click', closeQuiz);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeQuiz(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeQuiz();
+    });
+  })();
+
+  // ── MODAL DE PRECIO ──────────────────────────────────────────────────
+  (function() {
+    const overlay = document.getElementById('priceModalOverlay');
+    const closeBtn = document.getElementById('priceModalClose');
+    const levelEl = document.getElementById('priceModalLevel');
+    const nameEl = document.getElementById('priceModalName');
+    const priceEl = document.getElementById('priceModalPrice');
+    const subEl = document.getElementById('priceModalSub');
+    const includesEl = document.getElementById('priceModalIncludes');
+    const ctaEl = document.getElementById('priceModalCta');
+
+    const PROGRAMS = {
+      princ: {
+        level: '🟢 Nivel principiante',
+        levelColor: '#22c55e',
+        name: 'FITNESS GENERAL PRINCIPIANTE',
+        price: '20.000',
+        sub: 'Pago único · Descarga inmediata',
+        includes: '<strong>8 semanas</strong> · 3 días por semana · 3 rutinas completas con progresión planificada, escala de intensidad visual, tabla de registro de pesos y principios de nutrición incluidos.',
+        cta: 'Quiero este programa →'
+      },
+      inter: {
+        level: '🔵 Nivel intermedio',
+        levelColor: '#38bdf8',
+        name: 'FITNESS GENERAL INTERMEDIO',
+        price: '20.000',
+        sub: 'Pago único · Descarga inmediata',
+        includes: '<strong>10 semanas</strong> · 3 días por semana · Sistema RPE/RIR, doble progresión, técnicas avanzadas de intensificación y periodización en 5 fases.',
+        cta: 'Quiero este programa →'
+      },
+      avanz: {
+        level: '🔥 Nivel avanzado',
+        levelColor: '#f97316',
+        name: 'FITNESS GENERAL AVANZADO',
+        price: '20.000',
+        sub: 'Pago único · Descarga inmediata',
+        includes: '<strong>8 semanas</strong> · 4 días por semana · Split Upper/Lower, sistema combinado %RM + RPE/RIR, seguimiento de composición corporal y semana de pico + deload.',
+        cta: 'Quiero este programa →'
+      },
+      jump: {
+        level: '🏀 Básquet · Salto vertical',
+        levelColor: '#a78bfa',
+        name: 'JUMP HIGHER FOUNDATION',
+        price: '20.000',
+        sub: 'Pago único · Descarga inmediata',
+        includes: '<strong>8 semanas</strong> · 2 entrenos por semana · Evaluación CMJ y Abalakov, fuerza + pliometría + técnica de salto, con progresión guiada por RPE.',
+        cta: 'Quiero saltar más alto →'
+      }
+    };
+
+    function openPriceModal(key) {
+      const p = PROGRAMS[key];
+      if (!p) return;
+      levelEl.textContent = p.level;
+      levelEl.style.color = p.levelColor;
+      levelEl.style.background = p.levelColor + '1a';
+      levelEl.style.borderColor = p.levelColor + '4d';
+      levelEl.style.border = '1px solid ' + p.levelColor + '4d';
+      nameEl.textContent = p.name;
+      priceEl.innerHTML = `<em>$</em>${p.price}`;
+      subEl.textContent = p.sub;
+      includesEl.innerHTML = p.includes;
+      ctaEl.textContent = p.cta;
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePriceModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-price-program]').forEach(btn => {
+      btn.addEventListener('click', () => openPriceModal(btn.dataset.priceProgram));
+    });
+
+    closeBtn.addEventListener('click', closePriceModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePriceModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closePriceModal();
+    });
+  })();
+
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
